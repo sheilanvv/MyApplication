@@ -49,13 +49,12 @@
         android:layout_height="wrap_content"
         android:text="Login"></Button>
 
-    <TextView
-        android:id="@+id/textView"
+    <Button
+        android:id="@+id/btnDaftar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="text"
-        android:hint="Belum Punya Akun? Daftar Disini!" />
-
+        android:text="Daftar" ></Button>
+        />
 
 
 </LinearLayout>
