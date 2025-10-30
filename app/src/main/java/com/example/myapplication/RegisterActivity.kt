@@ -1,20 +1,41 @@
 package com.example.myapplication
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 
 class RegisterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_register)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+
+        val radioGroup = findViewById<RadioGroup>(R.id.radioGroupJenisKelamin)
+        val checkBox = findViewById<CheckBox>(R.id.checkboxAgree)
+        val btnDaftar = findViewById<Button>(R.id.btnDaftar)
+        val spinnerDomisili = findViewById<Spinner>(R.id.spinnerDomisili)
+
+        btnDaftar.setOnClickListener {
+            val selectedId = radioGroup.checkedRadioButtonId
+
+            if (selectedId == -1) {
+                Toast.makeText(this, "Silakan pilih jenis kelamin terlebih dahulu!", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            val jenisKelamin = when (selectedId) {
+                R.id.buttonPria -> "Pria"
+                R.id.buttonWanita -> "Wanita"
+                else -> "Tidak diketahui"
+            }
+
+            val isSetuju = checkBox.isChecked
+            val domisili = spinnerDomisili.selectedItem.toString()
+
+            Toast.makeText(
+                this,
+                "Jenis Kelamin: $jenisKelamin\nDomisili: $domisili\nSetuju: $isSetuju",
+                Toast.LENGTH_LONG
+            ).show()
         }
     }
 }
